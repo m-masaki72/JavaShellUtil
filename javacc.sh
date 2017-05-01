@@ -8,12 +8,9 @@ do
     echo "FileName : " $FILE
     echo "-----------------------"
 
-    javac $FILE
-
     echo ""
-    if [ $? -ne 0 ]; then
-        echo "ステータス：コンパイルエラー"
-    else
+    javac $FILE
+    if [ $? -eq 0 ]; then
 	grep "main" $FILE
 	if [ $? -eq 0 ]; then
 	    EXE=${FILE%.java}
@@ -27,7 +24,8 @@ do
 	else
 	    echo "ステータス：コンパイル完了"
 	fi
-
+    else
+        echo "ステータス：コンパイルエラー"
     fi
     echo ""
     echo "==========================="
